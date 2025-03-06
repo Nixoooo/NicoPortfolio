@@ -1,138 +1,197 @@
 <!DOCTYPE html>
-<html>
-<title>My Portfolio</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
-.w3-row-padding img {margin-bottom: 12px}
-/* Set the width of the sidebar to 120px */
-.w3-sidebar {width: 120px;background: #222;}
-/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
-#main {margin-left: 120px}
-/* Remove margins from "page content" on small screens */
-@media only screen and (max-width: 600px) {#main {margin-left: 0}}
-img{
-  border-radius: 700px;
-}
-</style>
-<body class="w3-black">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body, h1, h2, h3, h4, h5, h6 {
+      font-family: "Montserrat", sans-serif;
+    }
+    body {
+      background-color: #1a1a1a;
+      color: #f1f1f1;
+    }
+    .w3-sidebar {
+      width: 120px;
+      background: #222;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+    }
+    .w3-sidebar a {
+      padding: 16px;
+      display: block;
+      text-align: center;
+      color: #f1f1f1;
+      transition: background 0.3s, color 0.3s;
+    }
+    .w3-sidebar a:hover {
+      background: #444;
+      color: #fff;
+    }
+    #main {
+      margin-left: 120px;
+    }
+    @media only screen and (max-width: 600px) {
+      #main {
+        margin-left: 0;
+      }
+      .w3-sidebar {
+        display: none;
+      }
+    }
+    .w3-container {
+      padding: 64px 16px;
+    }
+    .w3-jumbo {
+      font-size: 64px !important;
+    }
+    .w3-text-teal {
+      color: #009688 !important;
+    }
+    .w3-button {
+      transition: background 0.3s, color 0.3s;
+    }
+    .w3-button:hover {
+      background: #009688 !important;
+      color: #fff !important;
+    }
+    .skill-bar {
+      background: #444;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .skill-level {
+      background: #009688;
+      height: 28px;
+      border-radius: 5px;
+    }
+    .photo-grid img {
+      width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+    .photo-grid img:hover {
+      transform: scale(1.05);
+    }
+    footer a {
+      color: #009688;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
 
-<!-- Icon Bar (Sidebar - hidden on small screens) -->
-<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-  <!-- Avatar image in top left corner -->
-  <img src=nico.jpg style="width:100%">
-  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">
-    <i class="fa fa-home w3-xxlarge"></i>
-    <p>HOME</p>
-  </a>
-  <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-    <i class="fa fa-user w3-xxlarge"></i>
-    <p>ABOUT</p>
-  </a>
-  
-  <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-    <i class="fa fa-envelope w3-xxlarge"></i>
-    <p>CONTACT</p>
-  </a>
+<!-- Sidebar -->
+<nav class="w3-sidebar w3-bar-block w3-center">
+  <img src="nico.jpg" alt="Profile Picture" style="width:100%; border-radius: 50%; margin-bottom: 16px;">
+  <a href="#home" class="w3-bar-item w3-button">HOME</a>
+  <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
+  <a href="#skills" class="w3-bar-item w3-button">SKILLS</a>
+  <a href="#contact" class="w3-bar-item w3-button">CONTACT</a>
 </nav>
 
-<!-- Navbar on small screens (Hidden on medium and large screens) -->
-<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
-  <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
-    <a href="#" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
-    <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
-    <a href="#photos" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
-    <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a>
-  </div>
-</div>
+<!-- Main Content -->
+<div id="main">
 
-  <p>FYI! This is not totally well developed</p> 
-<!-- Page Content -->
-<div class="w3-padding-large" id="main">
-  <!-- Header/Home -->
-  <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
+  <!-- Home Section -->
+  <header class="w3-container w3-center" id="home">
     <h1 class="w3-jumbo"><span class="w3-hide-small">I'm</span> Aubriel</h1>
-    
-    <img src=4.jpg alt="boy" class="cat" width="992" height="1108">
+    <p class="w3-large">FYI!This is not totally developed, Sorry (:</p>
+    <img src="4.jpg" alt="Profile Image" style="width:100%; max-width:600px; border-radius: 10px; margin-top: 32px;">
   </header>
 
   <!-- About Section -->
-  <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
-    <h2 class="w3-text-light-grey">About</h2>
-    <hr style="width:200px" class="w3-opacity">
-    <p>Im Aubriel Nico Soriano, 20 years old, from Concepcion Tarlac, Im currently Studying at Holy Cross College and taking Bachelor in Science in Computer Science, I love learning new things and Im good in troubleshooting.
+  <div class="w3-container" id="about">
+    <h2 class="w3-text-teal">About Me</h2>
+    <hr style="width:200px;" class="w3-opacity">
+    <p>
+      Hi, I'm Aubriel Nico Soriano, a 20-year-old Computer Science student at Holy Cross College. 
+      I'm passionate about learning new things, solving problems, and troubleshooting. 
+      I enjoy working with computers and constantly improving my skills to tackle challenges.
     </p>
-    <h3 class="w3-padding-16 w3-text-light-grey">My Skills</h3>
-    <p class="w3-wide">Learning new Skills</p>
-    <div class="w3-white">
-      <div class="w3-dark-grey" style="height:28px;width:95%"></div>
+  </div>
+
+  <!-- Skills Section -->
+  <div class="w3-container" id="skills">
+    <h2 class="w3-text-teal">My Skills</h2>
+    <hr style="width:200px;" class="w3-opacity">
+    <p>Problem Solving</p>
+    <div class="skill-bar">
+      <div class="skill-level" style="width:95%">95%</div>
     </div>
-    <p class="w3-wide">Communication</p>
-    <div class="w3-white">
-      <div class="w3-dark-grey" style="height:28px;width:85%"></div>
+    <p>Troubleshooting</p>
+    <div class="skill-bar">
+      <div class="skill-level" style="width:92%">92%</div>
     </div>
-    <p class="w3-wide">Problem Solving</p>
-    <div class="w3-white">
-      <div class="w3-dark-grey" style="height:28px;width:90%"></div>
+    <p>Computer Skills</p>
+    <div class="skill-bar">
+      <div class="skill-level" style="width:88%">88%</div>
     </div>
-    <p class="w3-wide">Troubleshooting</p>
-    <div class="w3-white">
-      <div class="w3-dark-grey" style="height:28px;width:92%"></div>
+    <p>Communication</p>
+    <div class="skill-bar">
+      <div class="skill-level" style="width:85%">85%</div>
     </div>
-    <p class="w3-wide">Computer Skill</p>
-    <div class="w3-white">
-      <div class="w3-dark-grey" style="height:28px;width:88%"></div>
-    </div>
-    
-    <button class="w3-button w3-light-grey w3-padding-large w3-section">
+    <button class="w3-button w3-teal w3-padding-large w3-margin-top">
       <i class="fa fa-download"></i> Download Resume
     </button>
-  
+  </div>
 
-      
-    <!-- End photo grid -->
+  <!-- Photos Section -->
+  <div class="w3-container" id="photos">
+    <h2 class="w3-text-teal">My Photos</h2>
+    <hr style="width:200px;" class="w3-opacity">
+    <div class="w3-row-padding photo-grid">
+      <div class="w3-half">
+        <img src="1.jpg" alt="Photo 1">
+        <img src="2.jpg" alt="Photo 2">
+      </div>
+      <div class="w3-half">
+        <img src="3.jpg" alt="Photo 3">
+        <img src="4.jpg" alt="Photo 4">
+      </div>
     </div>
-  <!-- End Portfolio Section -->
   </div>
 
   <!-- Contact Section -->
-  <div class="w3-padding-64 w3-content w3-text-grey" id="contact">
-    <h2 class="w3-text-light-grey">Contact Me</h2>
-    <hr style="width:200px" class="w3-opacity">
-
+  <div class="w3-container" id="contact">
+    <h2 class="w3-text-teal">Contact Me</h2>
+    <hr style="width:200px;" class="w3-opacity">
     <div class="w3-section">
-      <p><i class="fa fa-map-marker fa-fw w3-text-white w3-xxlarge w3-margin-right"></i>San Nicolas Balas CPN. Tarlac</p>
-      <p><i class="fa fa-phone fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Phone: +9100135809</p>
-      <p><i class="fa fa-envelope fa-fw w3-text-white w3-xxlarge w3-margin-right"> </i> Email: fannicotot@gmail.com</p>
-    </div><br>
-    <p>Let's get in touch. Send me a message:</p>
-
+      <p><i class="fa fa-map-marker"></i> San Nicolas Balas, Concepcion, Tarlac</p>
+      <p><i class="fa fa-phone"></i> Phone: +9100135809</p>
+      <p><i class="fa fa-envelope"></i> Email: fannicotot@gmail.com</p>
+    </div>
     <form action="/action_page.php" target="_blank">
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="Name"></p>
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Email" required name="Email"></p>
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Subject" required name="Subject"></p>
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Message" required name="Message"></p>
-      <p>
-        <button class="w3-button w3-light-grey w3-padding-large" type="submit">
-          <i class="fa fa-paper-plane"></i> SEND MESSAGE
-        </button>
-      </p>
+      <input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="Name">
+      <input class="w3-input w3-padding-16" type="text" placeholder="Email" required name="Email">
+      <input class="w3-input w3-padding-16" type="text" placeholder="Subject" required name="Subject">
+      <input class="w3-input w3-padding-16" type="text" placeholder="Message" required name="Message">
+      <button class="w3-button w3-teal w3-padding-large" type="submit">
+        <i class="fa fa-paper-plane"></i> SEND MESSAGE
+      </button>
     </form>
-  <!-- End Contact Section -->
   </div>
-  
-    <!-- Footer -->
-  <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
-   <a href="https://www.facebook.com/soriano.nico.PT"> <i class="fa fa-facebook-official w3-hover-opacity"></i></a>
-    <a href="https://www.instagram.com/aubrielnicosoriano/"><i class="fa fa-instagram w3-hover-opacity"></i></a>
-    <p class="w3-medium">Powered by <a href="#" target="_blank" class="w3-hover-text-green">Nico</a></p>
 
+  <!-- Footer -->
+  <footer class="w3-container w3-padding-64 w3-center">
+    <a href="https://www.facebook.com/soriano.nico.PT" class="w3-button w3-teal w3-round-large">
+      <i class="fa fa-facebook"></i> Facebook
+    </a>
+    <a href="https://www.instagram.com/aubrielnicosoriano/" class="w3-button w3-teal w3-round-large">
+      <i class="fa fa-instagram"></i> Instagram
+    </a>
+    <p class="w3-medium">Powered by <a href="#" target="_blank" class="w3-text-teal">Nico</a></p>
   </footer>
-
 
 </div>
 
