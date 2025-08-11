@@ -1,157 +1,272 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Portfolio</title>
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Aubriel — Portfolio</title>
+  <meta name="description" content="Aubriel Nico Soriano — Computer Science student & problem solver. Portfolio." />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="" crossorigin="anonymous" />
+
   <style>
-    body, h1, h2, h3, h4, h5, h6 { font-family: "Montserrat", sans-serif; }
-    body { background-color: #1a1a1a; color: #f1f1f1; scroll-behavior: smooth; }
-    .w3-sidebar { width: 120px; background: #222; position: fixed; z-index: 1; top: 0; left: 0; }
-    .w3-sidebar a { padding: 16px; display: block; text-align: center; color: #f1f1f1; transition: background 0.3s, color 0.3s; }
-    .w3-sidebar a:hover { background: #444; color: #fff; }
-    #main { margin-left: 120px; }
-    @media only screen and (max-width: 600px) { #main { margin-left: 0; } .w3-sidebar { display: none; } }
-    .w3-container { padding: 64px 16px; }
-    .w3-jumbo { font-size: 64px !important; }
-    .w3-text-teal { color: #009688 !important; }
-    .skill-bar { background: #444; border-radius: 5px; overflow: hidden; margin-bottom: 16px; }
-    .skill-level { background: #009688; height: 28px; width: 0; transition: width 1.5s ease-in-out; }
-    .photo-grid img { width: 100%; border-radius: 10px; transition: transform 0.3s; cursor: pointer; }
-    .photo-grid img:hover { transform: scale(1.05); }
-    footer a { color: #009688; text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
-    .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
-    .fade-in.show { opacity: 1; transform: translateY(0); }
+    :root{
+      --bg:#0b0c0d;
+      --card:#0f1112;
+      --muted:#9aa3a8;
+      --text:#e6eef0;
+      --accent:#00bfa5;
+      --glass: rgba(255,255,255,0.03);
+      --radius:14px;
+      --gap:20px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;padding:32px;background:linear-gradient(180deg,#060607 0%, #0e1112 100%);color:var(--text);
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;line-height:1.5;
+    }
+    .site{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:var(--gap)}
+
+    header.site-header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text)}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#00e1c6);display:flex;align-items:center;justify-content:center;font-weight:800;color:#042f2a;font-family:monospace;box-shadow:0 6px 20px rgba(0,0,0,0.5)}
+    nav.top-nav{display:flex;gap:12px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600;font-size:15px}
+    nav a:hover{color:var(--text);background:var(--glass);transform:translateY(-2px)}
+    .cta{background:linear-gradient(90deg,var(--accent),#00e1c6);color:#022e2a;padding:10px 14px;border-radius:12px;font-weight:700;text-decoration:none}
+
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:32px;align-items:center;padding:36px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:var(--radius);box-shadow:0 8px 40px rgba(0,0,0,0.6);backdrop-filter: blur(6px)}
+    .hero h1{font-size:40px;margin:0 0 8px;font-weight:800}
+    .hero p.lead{margin:0 0 20px;color:var(--muted);font-size:16px}
+    .hero .actions{display:flex;gap:12px;align-items:center}
+    .hero .photo{width:100%;height:100%;max-width:420px;border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.6)}
+    .hero .photo img{display:block;width:100%;height:100%;object-fit:cover}
+
+    .grid{display:grid;grid-template-columns: repeat(12, 1fr);gap:18px;align-items:start}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:22px;box-shadow:0 6px 30px rgba(0,0,0,0.5)}
+
+    .about{grid-column:1 / -1;display:flex;gap:20px;align-items:center}
+    .about .bio{flex:1}
+    .about .meta{width:240px;background:rgba(255,255,255,0.02);padding:16px;border-radius:10px}
+    .meta p{margin:8px 0;color:var(--muted);font-size:14px}
+
+    .skills{grid-column:1 / 7}
+    .photos{grid-column:7 / -1}
+    .skill{margin-bottom:14px;display:flex;gap:12px;align-items:center}
+    .skill .label{width:140px;color:var(--muted);font-weight:600}
+    .progress{flex:1;background:rgba(255,255,255,0.03);height:12px;border-radius:999px;overflow:hidden}
+    .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#00e1c6);width:0;transition:width 1.2s cubic-bezier(.2,.9,.25,1)}
+
+    .photos .photo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .photos img{width:100%;border-radius:10px;cursor:pointer;display:block;transition:transform .25s, box-shadow .25s}
+    .photos img:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.6)}
+
+    .contact{grid-column:1 / -1;display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start}
+    form.contact-form{display:flex;flex-direction:column;gap:12px}
+    .w-input{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:12px;border-radius:10px;color:var(--text)}
+    .w-textarea{min-height:120px;resize:vertical;padding:12px}
+    .submit{background:linear-gradient(90deg,var(--accent),#00e1c6);color:#022e2a;border:none;padding:12px;border-radius:10px;font-weight:700;cursor:pointer}
+    .contact .info{background:rgba(255,255,255,0.02);padding:18px;border-radius:10px;color:var(--muted)}
+    .contact .info p{margin:8px 0}
+
+    footer{grid-column:1 / -1;text-align:center;color:var(--muted);padding:18px 0;font-size:14px}
+
+    #lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.88);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px}
+    #lightbox img{max-width:95%;max-height:95%;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,0.7)}
+
+    @media (max-width:980px){.hero{grid-template-columns:1fr;text-align:center}.hero .photo{max-width:360px;margin:0 auto}.grid{grid-template-columns:repeat(6,1fr)}.skills{grid-column:1 / -1}.photos{grid-column:1 / -1}.contact{grid-template-columns:1fr}}
+    @media (max-width:560px){body{padding:18px}.logo{width:40px;height:40px}header.site-header{flex-direction:column;align-items:flex-start;gap:12px}}
+
+    .fade{opacity:0;transform:translateY(18px);transition:all .7s cubic-bezier(.2,.9,.25,1)}.fade.show{opacity:1;transform:none}
+
+    /* small accessibility: reduce motion if user prefers */
+    @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
   </style>
 </head>
 <body>
+  <main class="site">
 
-<!-- Sidebar -->
-<nav class="w3-sidebar w3-bar-block w3-center">
-  <img src="nico.jpg" alt="Profile Picture" style="width:100%; border-radius: 50%; margin-bottom: 16px;">
-  <a href="#home" class="w3-bar-item w3-button">HOME</a>
-  <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
-  <a href="#skills" class="w3-bar-item w3-button">SKILLS</a>
-  <a href="#photos" class="w3-bar-item w3-button">PHOTOS</a>
-  <a href="#contact" class="w3-bar-item w3-button">CONTACT</a>
-</nav>
+    <!-- Header -->
+    <header class="site-header">
+      <a class="brand" href="#home">
+        <div class="logo">AN</div>
+        <div>
+          <div style="font-weight:800">Aubriel Nico</div>
+          <div style="font-size:12px;color:var(--muted)">Computer Science — Problem Solver</div>
+        </div>
+      </a>
+      <nav class="top-nav" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#photos">Photos</a>
+        <a href="#contact">Contact</a>
+        <a class="cta" href="your-resume.pdf" download>Resume</a>
+      </nav>
+    </header>
 
-<!-- Main Content -->
-<div id="main">
-
-  <!-- Home -->
-  <header class="w3-container w3-center fade-in" id="home">
-    <h1 class="w3-jumbo"><span class="w3-hide-small">I'm</span> Aubriel</h1>
-    <p class="w3-large">FYI! This is now improved! 🎯</p>
-    <img src="4.jpg" alt="Profile Image" style="width:100%; max-width:600px; border-radius: 10px; margin-top: 32px;">
-  </header>
-
-  <!-- About -->
-  <div class="w3-container fade-in" id="about">
-    <h2 class="w3-text-teal">About Me</h2>
-    <hr style="width:200px;" class="w3-opacity">
-    <p>
-      Hi, I'm Aubriel Nico Soriano, a 21-year-old Computer Science student at Holy Cross College. 
-      I'm passionate about learning new things, solving problems, and troubleshooting. 
-      I enjoy working with computers and constantly improving my skills to tackle challenges.
-    </p>
-  </div>
-
-  <!-- Skills -->
-  <div class="w3-container fade-in" id="skills">
-    <h2 class="w3-text-teal">My Skills</h2>
-    <hr style="width:200px;" class="w3-opacity">
-    <p>Problem Solving</p>
-    <div class="skill-bar"><div class="skill-level" data-skill="95%"></div></div>
-    <p>Troubleshooting</p>
-    <div class="skill-bar"><div class="skill-level" data-skill="92%"></div></div>
-    <p>Computer Skills</p>
-    <div class="skill-bar"><div class="skill-level" data-skill="88%"></div></div>
-    <p>Communication</p>
-    <div class="skill-bar"><div class="skill-level" data-skill="85%"></div></div>
-    <button class="w3-button w3-teal w3-padding-large w3-margin-top">
-      <i class="fa fa-download"></i> Download Resume
-    </button>
-  </div>
-
-  <!-- Photos -->
-  <div class="w3-container fade-in" id="photos">
-    <h2 class="w3-text-teal">My Photos</h2>
-    <hr style="width:200px;" class="w3-opacity">
-    <div class="w3-row-padding photo-grid">
-      <div class="w3-half">
-        <img src="1.jpg" alt="Photo 1" onclick="openLightbox(this.src)">
-        <img src="2.jpg" alt="Photo 2" onclick="openLightbox(this.src)">
+    <!-- Hero -->
+    <section class="hero card fade" id="home">
+      <div>
+        <h1>Hi, I'm Aubriel.</h1>
+        <p class="lead">I solve problems with technology. Computer Science student at Holy Cross College — I enjoy debugging, troubleshooting, and building practical solutions.</p>
+        <div class="actions">
+          <a class="cta" href="#contact">Let's talk</a>
+          <a style="background:transparent;color:var(--muted);padding:10px 12px;border-radius:10px;text-decoration:none" href="#photos">See photos</a>
+        </div>
       </div>
+      <div class="photo">
+        <!-- Replace with your image (1200px+ recommended) -->
+        <img src="4.jpg" alt="Aubriel photo">
+      </div>
+    </section>
+
+    <div class="grid">
+
+      <!-- About -->
+      <section class="card about fade" id="about">
+        <div class="bio">
+          <h3>About Me</h3>
+          <p>Hello — I'm <strong>Aubriel Nico Soriano</strong>, 21, studying Computer Science at Holy Cross College. I enjoy learning new technologies, solving technical problems, and improving systems through careful troubleshooting and practical code. I focus on clear thinking, constant learning, and delivering reliable results. Outside of tech I enjoy photography and exploring ideas creatively.</p>
+        </div>
+        <aside class="meta">
+          <h4 style="margin-top:0">Details</h4>
+          <p><strong>Location</strong><br>San Nicolas Balas, Concepcion, Tarlac</p>
+          <p><strong>Contact</strong><br>+9100135809<br><a href="mailto:fannicotot@gmail.com" style="color:var(--accent);text-decoration:none">fannicotot@gmail.com</a></p>
+          <p style="margin-top:6px"><a href="https://www.facebook.com/soriano.nico.PT" target="_blank" style="color:var(--muted);text-decoration:none">Facebook</a> • <a href="https://www.instagram.com/aubrielnicosoriano/" target="_blank" style="color:var(--muted);text-decoration:none">Instagram</a></p>
+        </aside>
+      </section>
+
+      <!-- Skills -->
+      <section class="card skills fade" id="skills">
+        <h3>Skills & strengths</h3>
+        <div class="skill"><div class="label">Problem Solving</div><div class="progress"><i class="bar" data-value="95%" style="width:0"></i></div></div>
+        <div class="skill"><div class="label">Troubleshooting</div><div class="progress"><i class="bar" data-value="92%" style="width:0"></i></div></div>
+        <div class="skill"><div class="label">Computer Skills</div><div class="progress"><i class="bar" data-value="88%" style="width:0"></i></div></div>
+        <div class="skill"><div class="label">Communication</div><div class="progress"><i class="bar" data-value="85%" style="width:0"></i></div></div>
+      </section>
+
+      <!-- Photos -->
+      <aside class="card photos fade" id="photos">
+        <h3>Photos</h3>
+        <div class="photo-grid">
+          <img src="1.jpg" alt="Photo 1" loading="lazy" onclick="openLightbox('1.jpg')">
+          <img src="2.jpg" alt="Photo 2" loading="lazy" onclick="openLightbox('2.jpg')">
+          <img src="3.jpg" alt="Photo 3" loading="lazy" onclick="openLightbox('3.jpg')">
+          <img src="5.jpg" alt="Photo 4" loading="lazy" onclick="openLightbox('5.jpg')">
+        </div>
+      </aside>
+
+      <!-- Contact -->
+      <section class="card contact fade" id="contact">
+        <div>
+          <h3>Get in touch</h3>
+          <p>Have a project, question or just want to say hi? Send me a message and I'll get back to you.</p>
+
+          <!-- Formspree form: replace 'YOUR_FORM_ID' with your form id -->
+          <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <input class="w-input" type="text" name="name" placeholder="Your name" required>
+            <input class="w-input" type="email" name="email" placeholder="Your email" required>
+            <input class="w-input" type="text" name="subject" placeholder="Subject" required>
+            <textarea class="w-input w-textarea" name="message" placeholder="Message" required></textarea>
+            <button class="submit" type="submit">Send message</button>
+          </form>
+        </div>
+
+        <aside class="info">
+          <h4 style="margin-top:0">Contact</h4>
+          <p>Phone: +9100135809<br>Email: <a href="mailto:fannicotot@gmail.com" style="color:var(--accent);text-decoration:none">fannicotot@gmail.com</a></p>
+          <p>Download my resume or follow me on social for updates.</p>
+          <p><a class="cta" href="your-resume.pdf" download style="display:inline-block;margin-top:8px">Download Resume</a></p>
+        </aside>
+      </section>
+
+      <footer class="fade" style="grid-column:1 / -1">
+        © <span id="year"></span> Aubriel Nico — Built with care — Designed for clarity
+      </footer>
+
     </div>
+
+  </main>
+
+  <!-- Lightbox -->
+  <div id="lightbox" aria-hidden="true" role="dialog" onclick="closeLightbox()">
+    <img id="lb-img" alt="Enlarged photo">
   </div>
 
-  <!-- Contact -->
-  <div class="w3-container fade-in" id="contact">
-    <h2 class="w3-text-teal">Contact Me</h2>
-    <hr style="width:200px;" class="w3-opacity">
-    <div class="w3-section">
-      <p><i class="fa fa-map-marker"></i> San Nicolas Balas, Concepcion, Tarlac</p>
-      <p><i class="fa fa-phone"></i> Phone: +9100135809</p>
-      <p><i class="fa fa-envelope"></i> Email: fannicotot@gmail.com</p>
-    </div>
-    <form action="https://formspree.io/f/your-form-id" method="POST">
-      <input class="w3-input w3-padding-16" type="text" placeholder="Name" name="Name" required>
-      <input class="w3-input w3-padding-16" type="email" placeholder="Email" name="Email" required>
-      <input class="w3-input w3-padding-16" type="text" placeholder="Subject" name="Subject" required>
-      <textarea class="w3-input w3-padding-16" placeholder="Message" name="Message" required></textarea>
-      <button class="w3-button w3-teal w3-padding-large" type="submit">
-        <i class="fa fa-paper-plane"></i> SEND MESSAGE
-      </button>
-    </form>
-  </div>
+  <!-- AI Chatbot (Chatbase embed example). Replace CHATBOT_ID with your id. -->
+  <!-- To use OpenAI directly you'd add a small proxy/backend to keep your API key secret. -->
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-  <!-- Footer -->
-  <footer class="w3-container w3-padding-64 w3-center fade-in">
-    <a href="https://www.facebook.com/soriano.nico.PT" class="w3-button w3-teal w3-round-large"><i class="fa fa-facebook"></i> Facebook</a>
-    <a href="https://www.instagram.com/aubrielnicosoriano/" class="w3-button w3-teal w3-round-large"><i class="fa fa-instagram"></i> Instagram</a>
-    <p class="w3-medium">Powered by <a href="#" target="_blank" class="w3-text-teal">Nico</a></p>
-  </footer>
+    // Fade-in intersection
+    const fades = document.querySelectorAll('.fade');
+    const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }); }, {threshold: 0.12});
+    fades.forEach(n => io.observe(n));
 
-</div>
+    // Skill bars animation
+    const bars = document.querySelectorAll('.bar');
+    const barObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting){
+          const el = entry.target;
+          el.style.width = el.dataset.value;
+          entry.unobserve(el);
+        }
+      });
+    }, {threshold: 0.55});
+    bars.forEach(b => barObserver.observe(b));
 
-<!-- Lightbox Modal -->
-<div id="lightbox" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); align-items:center; justify-content:center;">
-  <img id="lightbox-img" src="" style="max-width:90%; max-height:90%; border-radius:10px;">
-</div>
+    // Lightbox
+    function openLightbox(src){
+      const lb = document.getElementById('lightbox');
+      const img = document.getElementById('lb-img');
+      img.src = src;
+      lb.style.display = 'flex';
+      lb.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(){
+      const lb = document.getElementById('lightbox');
+      const img = document.getElementById('lb-img');
+      lb.style.display = 'none';
+      lb.setAttribute('aria-hidden','true');
+      img.src = '';
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
 
-<script>
-  // Fade-in on scroll
-  const fadeEls = document.querySelectorAll('.fade-in');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('show');
-    });
-  }, { threshold: 0.2 });
-  fadeEls.forEach(el => observer.observe(el));
+    // Expose functions globally for onclick handlers in markup
+    window.openLightbox = openLightbox;
+    window.closeLightbox = closeLightbox;
+  </script>
 
-  // Animated skill bars
-  const skillObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.width = entry.target.dataset.skill;
-      }
-    });
-  }, { threshold: 0.5 });
-  document.querySelectorAll('.skill-level').forEach(bar => skillObserver.observe(bar));
+  <!-- Optional Chatbot embed (Chatbase) - place before closing body. Replace YOUR_CHATBASE_ID -->
+  <!--
+  <script>
+    window.embeddedChatbotConfig = { chatbotId: "YOUR_CHATBASE_ID", domain: "www.chatbase.co" };
+  </script>
+  <script src="https://www.chatbase.co/embed.min.js" chatbotId="YOUR_CHATBASE_ID" domain="www.chatbase.co" defer></script>
+  -->
 
-  // Lightbox
-  function openLightbox(src) {
-    document.getElementById('lightbox-img').src = src;
-    document.getElementById('lightbox').style.display = 'flex';
-  }
-  document.getElementById('lightbox').addEventListener('click', () => {
-    document.getElementById('lightbox').style.display = 'none';
-  });
-</script>
+  <!-- Optional Google Analytics (replace G-XXXXXXX) -->
+  <!--
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-XXXXXXX');
+  </script>
+  -->
+
+  <!-- Notes for you (remove before publishing):
+       - Replace image filenames (1.jpg,2.jpg,3.jpg,4.jpg,5.jpg) with real optimized images (1200px+ or WebP).
+       - Replace YOUR_FORM_ID with your Formspree form id, and your-resume.pdf with your resume file.
+       - To use OpenAI as chatbot you need a small server to hold your API key (I can provide an express example).
+       - Want this converted to a React/Vite template or deployed to GitHub Pages? Tell me which and I'll produce it.
+  -->
+
 </body>
 </html>
