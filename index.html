@@ -8,32 +8,153 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
-    body, h1, h2, h3, h4, h5, h6 {
-      font-family: "Montserrat", sans-serif;
-    }
-    body {
-      background-color: #1a1a1a;
-      color: #f1f1f1;
-    }
-    .w3-sidebar {
-      width: 120px;
-      background: #222;
-      position: fixed;
-      z-index: 1;
-      top: 0;
-      left: 0;
-    }
-    .w3-sidebar a {
-      padding: 16px;
-      display: block;
-      text-align: center;
-      color: #f1f1f1;
-      transition: background 0.3s, color 0.3s;
-    }
-    .w3-sidebar a:hover {
-      background: #444;
-      color: #fff;
-    }
+    body, h1, h2, h3, h4, h5, h6 { font-family: "Montserrat", sans-serif; }
+    body { background-color: #1a1a1a; color: #f1f1f1; scroll-behavior: smooth; }
+    .w3-sidebar { width: 120px; background: #222; position: fixed; z-index: 1; top: 0; left: 0; }
+    .w3-sidebar a { padding: 16px; display: block; text-align: center; color: #f1f1f1; transition: background 0.3s, color 0.3s; }
+    .w3-sidebar a:hover { background: #444; color: #fff; }
+    #main { margin-left: 120px; }
+    @media only screen and (max-width: 600px) { #main { margin-left: 0; } .w3-sidebar { display: none; } }
+    .w3-container { padding: 64px 16px; }
+    .w3-jumbo { font-size: 64px !important; }
+    .w3-text-teal { color: #009688 !important; }
+    .skill-bar { background: #444; border-radius: 5px; overflow: hidden; margin-bottom: 16px; }
+    .skill-level { background: #009688; height: 28px; width: 0; transition: width 1.5s ease-in-out; }
+    .photo-grid img { width: 100%; border-radius: 10px; transition: transform 0.3s; cursor: pointer; }
+    .photo-grid img:hover { transform: scale(1.05); }
+    footer a { color: #009688; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+    .fade-in.show { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<nav class="w3-sidebar w3-bar-block w3-center">
+  <img src="nico.jpg" alt="Profile Picture" style="width:100%; border-radius: 50%; margin-bottom: 16px;">
+  <a href="#home" class="w3-bar-item w3-button">HOME</a>
+  <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
+  <a href="#skills" class="w3-bar-item w3-button">SKILLS</a>
+  <a href="#photos" class="w3-bar-item w3-button">PHOTOS</a>
+  <a href="#contact" class="w3-bar-item w3-button">CONTACT</a>
+</nav>
+
+<!-- Main Content -->
+<div id="main">
+
+  <!-- Home -->
+  <header class="w3-container w3-center fade-in" id="home">
+    <h1 class="w3-jumbo"><span class="w3-hide-small">I'm</span> Aubriel</h1>
+    <p class="w3-large">FYI! This is now improved! 🎯</p>
+    <img src="4.jpg" alt="Profile Image" style="width:100%; max-width:600px; border-radius: 10px; margin-top: 32px;">
+  </header>
+
+  <!-- About -->
+  <div class="w3-container fade-in" id="about">
+    <h2 class="w3-text-teal">About Me</h2>
+    <hr style="width:200px;" class="w3-opacity">
+    <p>
+      Hi, I'm Aubriel Nico Soriano, a 21-year-old Computer Science student at Holy Cross College. 
+      I'm passionate about learning new things, solving problems, and troubleshooting. 
+      I enjoy working with computers and constantly improving my skills to tackle challenges.
+    </p>
+  </div>
+
+  <!-- Skills -->
+  <div class="w3-container fade-in" id="skills">
+    <h2 class="w3-text-teal">My Skills</h2>
+    <hr style="width:200px;" class="w3-opacity">
+    <p>Problem Solving</p>
+    <div class="skill-bar"><div class="skill-level" data-skill="95%"></div></div>
+    <p>Troubleshooting</p>
+    <div class="skill-bar"><div class="skill-level" data-skill="92%"></div></div>
+    <p>Computer Skills</p>
+    <div class="skill-bar"><div class="skill-level" data-skill="88%"></div></div>
+    <p>Communication</p>
+    <div class="skill-bar"><div class="skill-level" data-skill="85%"></div></div>
+    <button class="w3-button w3-teal w3-padding-large w3-margin-top">
+      <i class="fa fa-download"></i> Download Resume
+    </button>
+  </div>
+
+  <!-- Photos -->
+  <div class="w3-container fade-in" id="photos">
+    <h2 class="w3-text-teal">My Photos</h2>
+    <hr style="width:200px;" class="w3-opacity">
+    <div class="w3-row-padding photo-grid">
+      <div class="w3-half">
+        <img src="1.jpg" alt="Photo 1" onclick="openLightbox(this.src)">
+        <img src="2.jpg" alt="Photo 2" onclick="openLightbox(this.src)">
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div class="w3-container fade-in" id="contact">
+    <h2 class="w3-text-teal">Contact Me</h2>
+    <hr style="width:200px;" class="w3-opacity">
+    <div class="w3-section">
+      <p><i class="fa fa-map-marker"></i> San Nicolas Balas, Concepcion, Tarlac</p>
+      <p><i class="fa fa-phone"></i> Phone: +9100135809</p>
+      <p><i class="fa fa-envelope"></i> Email: fannicotot@gmail.com</p>
+    </div>
+    <form action="https://formspree.io/f/your-form-id" method="POST">
+      <input class="w3-input w3-padding-16" type="text" placeholder="Name" name="Name" required>
+      <input class="w3-input w3-padding-16" type="email" placeholder="Email" name="Email" required>
+      <input class="w3-input w3-padding-16" type="text" placeholder="Subject" name="Subject" required>
+      <textarea class="w3-input w3-padding-16" placeholder="Message" name="Message" required></textarea>
+      <button class="w3-button w3-teal w3-padding-large" type="submit">
+        <i class="fa fa-paper-plane"></i> SEND MESSAGE
+      </button>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer class="w3-container w3-padding-64 w3-center fade-in">
+    <a href="https://www.facebook.com/soriano.nico.PT" class="w3-button w3-teal w3-round-large"><i class="fa fa-facebook"></i> Facebook</a>
+    <a href="https://www.instagram.com/aubrielnicosoriano/" class="w3-button w3-teal w3-round-large"><i class="fa fa-instagram"></i> Instagram</a>
+    <p class="w3-medium">Powered by <a href="#" target="_blank" class="w3-text-teal">Nico</a></p>
+  </footer>
+
+</div>
+
+<!-- Lightbox Modal -->
+<div id="lightbox" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); align-items:center; justify-content:center;">
+  <img id="lightbox-img" src="" style="max-width:90%; max-height:90%; border-radius:10px;">
+</div>
+
+<script>
+  // Fade-in on scroll
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('show');
+    });
+  }, { threshold: 0.2 });
+  fadeEls.forEach(el => observer.observe(el));
+
+  // Animated skill bars
+  const skillObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.width = entry.target.dataset.skill;
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.skill-level').forEach(bar => skillObserver.observe(bar));
+
+  // Lightbox
+  function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+  }
+  document.getElementById('lightbox').addEventListener('click', () => {
+    document.getElementById('lightbox').style.display = 'none';
+  });
+</script>
+</body>
+</html>
     #main {
       margin-left: 120px;
     }
@@ -192,3 +313,4 @@
 
 </body>
 </html>
+
