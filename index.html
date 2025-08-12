@@ -1,272 +1,938 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Aubriel — Portfolio</title>
-  <meta name="description" content="Aubriel Nico Soriano — Computer Science student & problem solver. Portfolio." />
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="" crossorigin="anonymous" />
-
-  <style>
-    :root{
-      --bg:#0b0c0d;
-      --card:#0f1112;
-      --muted:#9aa3a8;
-      --text:#e6eef0;
-      --accent:#00bfa5;
-      --glass: rgba(255,255,255,0.03);
-      --radius:14px;
-      --gap:20px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;padding:32px;background:linear-gradient(180deg,#060607 0%, #0e1112 100%);color:var(--text);
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
-      -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;line-height:1.5;
-    }
-    .site{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:var(--gap)}
-
-    header.site-header{display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text)}
-    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#00e1c6);display:flex;align-items:center;justify-content:center;font-weight:800;color:#042f2a;font-family:monospace;box-shadow:0 6px 20px rgba(0,0,0,0.5)}
-    nav.top-nav{display:flex;gap:12px;align-items:center}
-    nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600;font-size:15px}
-    nav a:hover{color:var(--text);background:var(--glass);transform:translateY(-2px)}
-    .cta{background:linear-gradient(90deg,var(--accent),#00e1c6);color:#022e2a;padding:10px 14px;border-radius:12px;font-weight:700;text-decoration:none}
-
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:32px;align-items:center;padding:36px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:var(--radius);box-shadow:0 8px 40px rgba(0,0,0,0.6);backdrop-filter: blur(6px)}
-    .hero h1{font-size:40px;margin:0 0 8px;font-weight:800}
-    .hero p.lead{margin:0 0 20px;color:var(--muted);font-size:16px}
-    .hero .actions{display:flex;gap:12px;align-items:center}
-    .hero .photo{width:100%;height:100%;max-width:420px;border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.6)}
-    .hero .photo img{display:block;width:100%;height:100%;object-fit:cover}
-
-    .grid{display:grid;grid-template-columns: repeat(12, 1fr);gap:18px;align-items:start}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:22px;box-shadow:0 6px 30px rgba(0,0,0,0.5)}
-
-    .about{grid-column:1 / -1;display:flex;gap:20px;align-items:center}
-    .about .bio{flex:1}
-    .about .meta{width:240px;background:rgba(255,255,255,0.02);padding:16px;border-radius:10px}
-    .meta p{margin:8px 0;color:var(--muted);font-size:14px}
-
-    .skills{grid-column:1 / 7}
-    .photos{grid-column:7 / -1}
-    .skill{margin-bottom:14px;display:flex;gap:12px;align-items:center}
-    .skill .label{width:140px;color:var(--muted);font-weight:600}
-    .progress{flex:1;background:rgba(255,255,255,0.03);height:12px;border-radius:999px;overflow:hidden}
-    .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#00e1c6);width:0;transition:width 1.2s cubic-bezier(.2,.9,.25,1)}
-
-    .photos .photo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-    .photos img{width:100%;border-radius:10px;cursor:pointer;display:block;transition:transform .25s, box-shadow .25s}
-    .photos img:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.6)}
-
-    .contact{grid-column:1 / -1;display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start}
-    form.contact-form{display:flex;flex-direction:column;gap:12px}
-    .w-input{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:12px;border-radius:10px;color:var(--text)}
-    .w-textarea{min-height:120px;resize:vertical;padding:12px}
-    .submit{background:linear-gradient(90deg,var(--accent),#00e1c6);color:#022e2a;border:none;padding:12px;border-radius:10px;font-weight:700;cursor:pointer}
-    .contact .info{background:rgba(255,255,255,0.02);padding:18px;border-radius:10px;color:var(--muted)}
-    .contact .info p{margin:8px 0}
-
-    footer{grid-column:1 / -1;text-align:center;color:var(--muted);padding:18px 0;font-size:14px}
-
-    #lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.88);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px}
-    #lightbox img{max-width:95%;max-height:95%;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,0.7)}
-
-    @media (max-width:980px){.hero{grid-template-columns:1fr;text-align:center}.hero .photo{max-width:360px;margin:0 auto}.grid{grid-template-columns:repeat(6,1fr)}.skills{grid-column:1 / -1}.photos{grid-column:1 / -1}.contact{grid-template-columns:1fr}}
-    @media (max-width:560px){body{padding:18px}.logo{width:40px;height:40px}header.site-header{flex-direction:column;align-items:flex-start;gap:12px}}
-
-    .fade{opacity:0;transform:translateY(18px);transition:all .7s cubic-bezier(.2,.9,.25,1)}.fade.show{opacity:1;transform:none}
-
-    /* small accessibility: reduce motion if user prefers */
-    @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaPure - Water Refilling Station</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <main class="site">
-
-    <!-- Header -->
-    <header class="site-header">
-      <a class="brand" href="#home">
-        <div class="logo">AN</div>
-        <div>
-          <div style="font-weight:800">Aubriel Nico</div>
-          <div style="font-size:12px;color:var(--muted)">Computer Science — Problem Solver</div>
+<body class="bg-gray-100 min-h-screen">
+    <!-- Navigation for authenticated users (hidden by default) -->
+    <nav id="authenticated-nav" class="bg-water-blue shadow-md hidden">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-3">
+                <div class="flex items-center">
+                    <div class="water-drop text-4xl mr-2">💧</div>
+                    <span class="text-white font-bold text-xl">AquaPure</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="showPage('customer-dashboard')" class="text-white hover:text-gray-200" id="dashboard-nav-btn">
+                        <i class="fas fa-home mr-1"></i> Dashboard
+                    </button>
+                    <button onclick="showPage('order')" class="text-white hover:text-gray-200" id="order-nav-btn">
+                        <i class="fas fa-shopping-cart mr-1"></i> Order
+                    </button>
+                    <button onclick="showPage('profile')" class="text-white hover:text-gray-200" id="profile-nav-btn">
+                        <i class="fas fa-user mr-1"></i> Profile
+                    </button>
+                    <div class="relative">
+                        <button id="user-dropdown-btn" class="flex items-center text-white">
+                            <span id="current-username">User</span>
+                            <i class="fas fa-chevron-down ml-1"></i>
+                        </button>
+                        <div id="user-dropdown" class="absolute right-0 mt-2 bg-white rounded shadow-lg py-2 hidden z-10">
+                            <a href="#" onclick="logout()" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </a>
-      <nav class="top-nav" aria-label="Primary">
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#photos">Photos</a>
-        <a href="#contact">Contact</a>
-        <a class="cta" href="your-resume.pdf" download>Resume</a>
-      </nav>
-    </header>
+    </nav>
 
-    <!-- Hero -->
-    <section class="hero card fade" id="home">
-      <div>
-        <h1>Hi, I'm Aubriel.</h1>
-        <p class="lead">I solve problems with technology. Computer Science student at Holy Cross College — I enjoy debugging, troubleshooting, and building practical solutions.</p>
-        <div class="actions">
-          <a class="cta" href="#contact">Let's talk</a>
-          <a style="background:transparent;color:var(--muted);padding:10px 12px;border-radius:10px;text-decoration:none" href="#photos">See photos</a>
+    <!-- Admin Navigation (hidden by default) -->
+    <nav id="admin-nav" class="bg-gray-800 shadow-md hidden">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-3">
+                <div class="flex items-center">
+                    <div class="water-drop text-4xl mr-2">💧</div>
+                    <span class="text-white font-bold text-xl">AquaPure Admin</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="showPage('admin-dashboard')" class="text-white hover:text-gray-300">
+                        <i class="fas fa-tachometer-alt mr-1"></i> Dashboard
+                    </button>
+                    <button onclick="showPage('admin-orders')" class="text-white hover:text-gray-300">
+                        <i class="fas fa-list-alt mr-1"></i> Orders
+                    </button>
+                    <button onclick="showPage('admin-inventory')" class="text-white hover:text-gray-300">
+                        <i class="fas fa-boxes mr-1"></i> Inventory
+                    </button>
+                    <button onclick="showPage('admin-analytics')" class="text-white hover:text-gray-300">
+                        <i class="fas fa-chart-line mr-1"></i> Analytics
+                    </button>
+                    <button onclick="logout()" class="text-white hover:text-gray-300">
+                        <i class="fas fa-sign-out-alt mr-1"></i> Logout
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="photo">
-        <!-- Replace with your image (1200px+ recommended) -->
-        <img src="4.jpg" alt="Aubriel photo">
-      </div>
+    </nav>
+
+    <!-- Login/Register Section -->
+    <section id="auth-section" class="page-section active-section py-10">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-center items-center mb-10">
+                <div class="water-drop text-7xl mr-3">💧</div>
+                <h1 class="text-4xl font-bold text-water-blue">AquaPure</h1>
+            </div>
+            <div class="max-w-md mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="px-6 py-8">
+                    <div class="flex border-b border-gray-200">
+                        <button id="login-tab" class="py-2 px-4 text-water-blue font-medium border-b-2 border-water-blue">Login</button>
+                        <button id="register-tab" class="py-2 px-4 text-gray-500 font-medium">Register</button>
+                    </div>
+                    
+                    <!-- Login Form -->
+                    <div id="login-form" class="pt-6">
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="login-email">
+                                Email
+                            </label>
+                            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="login-email" type="email" placeholder="Email">
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="login-password">
+                                Password
+                            </label>
+                            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="login-password" type="password" placeholder="Password">
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center">
+                                <input id="remember-me" type="checkbox" class="h-4 w-4 text-water-blue">
+                                <label for="remember-me" class="ml-2 block text-sm text-gray-700">
+                                    Remember me
+                                </label>
+                            </div>
+                            <a href="#" class="text-sm text-water-blue hover:underline">Forgot password?</a>
+                        </div>
+                        <div class="mb-4">
+                            <button onclick="login()" class="w-full btn-water py-2 px-4 rounded-md font-medium">
+                                Login
+                            </button>
+                        </div>
+                        <div class="mb-4">
+                            <button onclick="adminLogin()" class="w-full bg-gray-800 text-white py-2 px-4 rounded-md font-medium hover:bg-gray-700">
+                                Admin Login
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Register Form -->
+                    <div id="register-form" class="pt-6 hidden">
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="register-name">
+                                Full Name
+                            </label>
+                            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="register-name" type="text" placeholder="Full Name">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="register-email">
+                                Email
+                            </label>
+                            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="register-email" type="email" placeholder="Email">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="register-password">
+                                Password
+                            </label>
+                            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="register-password" type="password" placeholder="Password">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="register-confirm-password">
+                                Confirm Password
+                            </label>
+                            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="register-confirm-password" type="password" placeholder="Confirm Password">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="register-phone">
+                                Phone Number
+                            </label>
+                            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="register-phone" type="text" placeholder="Phone Number">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="register-address">
+                                Address
+                            </label>
+                            <textarea class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="register-address" placeholder="Full Address"></textarea>
+                        </div>
+                        <div class="mb-4">
+                            <button onclick="register()" class="w-full btn-water py-2 px-4 rounded-md font-medium">
+                                Register
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <div class="grid">
-
-      <!-- About -->
-      <section class="card about fade" id="about">
-        <div class="bio">
-          <h3>About Me</h3>
-          <p>Hello — I'm <strong>Aubriel Nico Soriano</strong>, 21, studying Computer Science at Holy Cross College. I enjoy learning new technologies, solving technical problems, and improving systems through careful troubleshooting and practical code. I focus on clear thinking, constant learning, and delivering reliable results. Outside of tech I enjoy photography and exploring ideas creatively.</p>
+    <!-- Customer Dashboard Section -->
+    <section id="customer-dashboard" class="page-section py-10">
+        <div class="container mx-auto px-4">
+            <h1 class="text-3xl font-bold text-gray-800 mb-6">Welcome, <span id="dashboard-username">User</span>!</h1>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">Active Orders</h2>
+                        <span class="bg-blue-100 text-blue-800 py-1 px-3 rounded-full text-sm font-medium" id="active-orders-count">0</span>
+                    </div>
+                    <p class="text-gray-600">Your current active orders</p>
+                    <a href="#" onclick="showPage('order')" class="mt-4 inline-block text-water-blue hover:underline">Place New Order</a>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">Total Orders</h2>
+                        <span class="bg-green-100 text-green-800 py-1 px-3 rounded-full text-sm font-medium" id="total-orders-count">0</span>
+                    </div>
+                    <p class="text-gray-600">Your order history</p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">Next Delivery</h2>
+                        <span class="bg-purple-100 text-purple-800 py-1 px-3 rounded-full text-sm font-medium" id="next-delivery">None</span>
+                    </div>
+                    <p class="text-gray-600">Estimated arrival time of your next order</p>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+                <div class="p-6 bg-gray-50 border-b border-gray-200">
+                    <h2 class="text-xl font-semibold text-gray-800">Recent Orders</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order ID</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Items</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200" id="recent-orders-table">
+                            <!-- Orders will be inserted here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-6 bg-gray-50 border-b border-gray-200">
+                    <h2 class="text-xl font-semibold text-gray-800">Order Tracking</h2>
+                </div>
+                <div class="p-6" id="order-tracking-container">
+                    <p class="text-gray-600 text-center py-10">Select an order to track its status</p>
+                </div>
+            </div>
         </div>
-        <aside class="meta">
-          <h4 style="margin-top:0">Details</h4>
-          <p><strong>Location</strong><br>San Nicolas Balas, Concepcion, Tarlac</p>
-          <p><strong>Contact</strong><br>+9100135809<br><a href="mailto:fannicotot@gmail.com" style="color:var(--accent);text-decoration:none">fannicotot@gmail.com</a></p>
-          <p style="margin-top:6px"><a href="https://www.facebook.com/soriano.nico.PT" target="_blank" style="color:var(--muted);text-decoration:none">Facebook</a> • <a href="https://www.instagram.com/aubrielnicosoriano/" target="_blank" style="color:var(--muted);text-decoration:none">Instagram</a></p>
-        </aside>
-      </section>
+    </section>
 
-      <!-- Skills -->
-      <section class="card skills fade" id="skills">
-        <h3>Skills & strengths</h3>
-        <div class="skill"><div class="label">Problem Solving</div><div class="progress"><i class="bar" data-value="95%" style="width:0"></i></div></div>
-        <div class="skill"><div class="label">Troubleshooting</div><div class="progress"><i class="bar" data-value="92%" style="width:0"></i></div></div>
-        <div class="skill"><div class="label">Computer Skills</div><div class="progress"><i class="bar" data-value="88%" style="width:0"></i></div></div>
-        <div class="skill"><div class="label">Communication</div><div class="progress"><i class="bar" data-value="85%" style="width:0"></i></div></div>
-      </section>
-
-      <!-- Photos -->
-      <aside class="card photos fade" id="photos">
-        <h3>Photos</h3>
-        <div class="photo-grid">
-          <img src="1.jpg" alt="Photo 1" loading="lazy" onclick="openLightbox('1.jpg')">
-          <img src="2.jpg" alt="Photo 2" loading="lazy" onclick="openLightbox('2.jpg')">
-          <img src="3.jpg" alt="Photo 3" loading="lazy" onclick="openLightbox('3.jpg')">
-          <img src="5.jpg" alt="Photo 4" loading="lazy" onclick="openLightbox('5.jpg')">
+    <!-- Order Section -->
+    <section id="order" class="page-section py-10">
+        <div class="container mx-auto px-4">
+            <h1 class="text-3xl font-bold text-gray-800 mb-6">Place an Order</h1>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4">Select Products</h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="border rounded-lg overflow-hidden">
+                                <div class="relative h-48 bg-gray-200">
+                                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ef8823b3-826f-40fc-bf9a-764ad3659fdf.png" alt="Box container for water with rectangular shape and sturdy plastic material" class="w-full h-full object-cover">
+                                </div>
+                                <div class="p-4">
+                                    <h3 class="text-lg font-semibold mb-2">Box Container</h3>
+                                    <p class="text-gray-600 mb-2">Clean, durable box containers for water storage</p>
+                                    <p class="text-water-blue font-bold mb-4">₱45.00</p>
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <button onclick="decrementQuantity('box')" class="bg-gray-200 px-3 py-1 rounded-l-md">-</button>
+                                            <input type="number" id="box-quantity" value="0" min="0" max="20" class="w-16 text-center border-t border-b border-gray-300 py-1">
+                                            <button onclick="incrementQuantity('box')" class="bg-gray-200 px-3 py-1 rounded-r-md">+</button>
+                                        </div>
+                                        <button onclick="addToCart('box')" class="btn-water py-1 px-4 rounded-md">Add</button>
+                                    </div>
+                                    <p id="box-stock" class="text-sm text-gray-500 mt-2">In stock: 50</p>
+                                </div>
+                            </div>
+                            
+                            <div class="border rounded-lg overflow-hidden">
+                                <div class="relative h-48 bg-gray-200">
+                                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4146259a-ad4b-4d99-a85c-57a10ab1203c.png" alt="Cylinder container for water with round shape and blue-tinted plastic" class="w-full h-full object-cover">
+                                </div>
+                                <div class="p-4">
+                                    <h3 class="text-lg font-semibold mb-2">Cylinder Container</h3>
+                                    <p class="text-gray-600 mb-2">Premium cylinder containers for water dispensers</p>
+                                    <p class="text-water-blue font-bold mb-4">₱25.00</p>
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <button onclick="decrementQuantity('cylinder')" class="bg-gray-200 px-3 py-1 rounded-l-md">-</button>
+                                            <input type="number" id="cylinder-quantity" value="0" min="0" max="20" class="w-16 text-center border-t border-b border-gray-300 py-1">
+                                            <button onclick="incrementQuantity('cylinder')" class="bg-gray-200 px-3 py-1 rounded-r-md">+</button>
+                                        </div>
+                                        <button onclick="addToCart('cylinder')" class="btn-water py-1 px-4 rounded-md">Add</button>
+                                    </div>
+                                    <p id="cylinder-stock" class="text-sm text-gray-500 mt-2">In stock: 75</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="bg-white rounded-lg shadow-md p-6 sticky top-6">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4">Your Cart</h2>
+                        
+                        <div id="empty-cart" class="text-center py-6">
+                            <i class="fas fa-shopping-cart text-4xl text-gray-300 mb-3"></i>
+                            <p class="text-gray-500">Your cart is empty</p>
+                        </div>
+                        
+                        <div id="cart-items" class="hidden">
+                            <div class="border-b pb-4 mb-4">
+                                <div id="cart-items-list">
+                                    <!-- Cart items will be added here -->
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-2 mb-6">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Subtotal</span>
+                                    <span id="cart-subtotal">₱0.00</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Delivery Fee</span>
+                                    <span>₱20.00</span>
+                                </div>
+                                <div class="flex justify-between font-semibold">
+                                    <span>Total</span>
+                                    <span id="cart-total" class="text-water-blue">₱0.00</span>
+                                </div>
+                            </div>
+                            
+                            <button onclick="checkout()" class="w-full btn-water py-2 px-4 rounded-md font-medium">
+                                Proceed to Checkout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </aside>
+    </section>
 
-      <!-- Contact -->
-      <section class="card contact fade" id="contact">
-        <div>
-          <h3>Get in touch</h3>
-          <p>Have a project, question or just want to say hi? Send me a message and I'll get back to you.</p>
-
-          <!-- Formspree form: replace 'YOUR_FORM_ID' with your form id -->
-          <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-            <input class="w-input" type="text" name="name" placeholder="Your name" required>
-            <input class="w-input" type="email" name="email" placeholder="Your email" required>
-            <input class="w-input" type="text" name="subject" placeholder="Subject" required>
-            <textarea class="w-input w-textarea" name="message" placeholder="Message" required></textarea>
-            <button class="submit" type="submit">Send message</button>
-          </form>
+    <!-- Profile Section -->
+    <section id="profile" class="page-section py-10">
+        <div class="container mx-auto px-4">
+            <h1 class="text-3xl font-bold text-gray-800 mb-6">Your Profile</h1>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4">Personal Information</h2>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="profile-name">
+                                    Full Name
+                                </label>
+                                <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="profile-name" type="text" placeholder="Full Name">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="profile-email">
+                                    Email
+                                </label>
+                                <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="profile-email" type="email" placeholder="Email">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="profile-phone">
+                                    Phone Number
+                                </label>
+                                <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="profile-phone" type="text" placeholder="Phone Number">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4">Address Information</h2>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="profile-address">
+                                    Full Address
+                                </label>
+                                <textarea class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="profile-address" placeholder="Full Address" rows="3"></textarea>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="profile-landmark">
+                                    Landmark (Optional)
+                                </label>
+                                <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="profile-landmark" type="text" placeholder="Landmark">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="profile-notes">
+                                    Delivery Notes (Optional)
+                                </label>
+                                <textarea class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="profile-notes" placeholder="Delivery Notes" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="bg-white rounded-lg shadow-md p-6 sticky top-6">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4">Account Settings</h2>
+                        
+                        <div class="space-y-4 mb-6">
+                            <div>
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="profile-current-password">
+                                    Current Password
+                                </label>
+                                <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="profile-current-password" type="password" placeholder="Current Password">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="profile-new-password">
+                                    New Password
+                                </label>
+                                <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="profile-new-password" type="password" placeholder="New Password">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="profile-confirm-password">
+                                    Confirm New Password
+                                </label>
+                                <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="profile-confirm-password" type="password" placeholder="Confirm New Password">
+                            </div>
+                        </div>
+                        
+                        <button onclick="updateProfile()" class="w-full btn-water py-2 px-4 rounded-md font-medium mb-3">
+                            Save Changes
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <aside class="info">
-          <h4 style="margin-top:0">Contact</h4>
-          <p>Phone: +9100135809<br>Email: <a href="mailto:fannicotot@gmail.com" style="color:var(--accent);text-decoration:none">fannicotot@gmail.com</a></p>
-          <p>Download my resume or follow me on social for updates.</p>
-          <p><a class="cta" href="your-resume.pdf" download style="display:inline-block;margin-top:8px">Download Resume</a></p>
-        </aside>
-      </section>
+    <!-- Admin Dashboard Section -->
+    <section id="admin-dashboard" class="page-section py-10">
+        <div class="container mx-auto px-4">
+            <h1 class="text-3xl font-bold text-gray-800 mb-6">Admin Dashboard</h1>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">Total Orders</h2>
+                        <div class="bg-blue-100 text-blue-800 p-2 rounded-full">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                    </div>
+                    <p class="text-3xl font-bold" id="admin-total-orders">0</p>
+                    <p class="text-sm text-green-600 mt-2">
+                        <i class="fas fa-arrow-up"></i> 15% from last week
+                    </p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">Total Sales</h2>
+                        <div class="bg-green-100 text-green-800 p-2 rounded-full">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                    </div>
+                    <p class="text-3xl font-bold" id="admin-total-sales">₱0.00</p>
+                    <p class="text-sm text-green-600 mt-2">
+                        <i class="fas fa-arrow-up"></i> 8% from last week
+                    </p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">Customers</h2>
+                        <div class="bg-purple-100 text-purple-800 p-2 rounded-full">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                    <p class="text-3xl font-bold" id="admin-total-customers">0</p>
+                    <p class="text-sm text-green-600 mt-2">
+                        <i class="fas fa-arrow-up"></i> 12% from last month
+                    </p>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">Pending Orders</h2>
+                        <div class="bg-yellow-100 text-yellow-800 p-2 rounded-full">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                    </div>
+                    <p class="text-3xl font-bold" id="admin-pending-orders">0</p>
+                    <p class="text-sm text-yellow-600 mt-2">
+                        <i class="fas fa-exclamation-triangle"></i> Require attention
+                    </p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                <div class="lg:col-span-2 bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="p-6 bg-gray-50 border-b border-gray-200">
+                        <h2 class="text-xl font-semibold text-gray-800">Sales Overview</h2>
+                    </div>
+                    <div class="p-6">
+                        <canvas id="sales-chart" height="300"></canvas>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="p-6 bg-gray-50 border-b border-gray-200">
+                        <h2 class="text-xl font-semibold text-gray-800">Product Inventory</h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-6">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-700">Box Containers</span>
+                                <span class="text-gray-700" id="admin-box-inventory">50</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-water-blue h-2.5 rounded-full" id="admin-box-inventory-bar" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-700">Cylinder Containers</span>
+                                <span class="text-gray-700" id="admin-cylinder-inventory">75</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-water-blue h-2.5 rounded-full" id="admin-cylinder-inventory-bar" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <button onclick="showPage('admin-inventory')" class="text-water-blue hover:underline flex items-center">
+                                <span>Manage Inventory</span>
+                                <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-6 bg-gray-50 border-b border-gray-200 flex justify-between items-center">
+                    <h2 class="text-xl font-semibold text-gray-800">Recent Orders</h2>
+                    <button onclick="showPage('admin-orders')" class="text-water-blue hover:underline flex items-center">
+                        <span>View All</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order ID</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200" id="admin-recent-orders-table">
+                            <!-- Orders will be inserted here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      <footer class="fade" style="grid-column:1 / -1">
-        © <span id="year"></span> Aubriel Nico — Built with care — Designed for clarity
-      </footer>
+    <!-- Admin Orders Section -->
+    <section id="admin-orders" class="page-section py-10">
+        <div class="container mx-auto px-4">
+            <h1 class="text-3xl font-bold text-gray-800 mb-6">Order Management</h1>
+            
+            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+                <div class="p-6 bg-gray-50 border-b border-gray-200">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4 md:mb-0">All Orders</h2>
+                        <div class="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-4">
+                            <div class="flex">
+                                <input type="text" placeholder="Search orders..." class="border rounded-l-md px-4 py-2 focus:outline-none">
+                                <button class="bg-gray-200 px-4 py-2 rounded-r-md">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                            <div>
+                                <select class="border rounded-md px-4 py-2 focus:outline-none">
+                                    <option value="all">All Statuses</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="processing">Processing</option>
+                                    <option value="out-for-delivery">Out for Delivery</option>
+                                    <option value="delivered">Delivered</option>
+                                    <option value="cancelled">Cancelled</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order ID</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Items</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200" id="admin-all-orders-table">
+                            <!-- Orders will be inserted here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-6 bg-gray-50 border-t border-gray-200">
+                    <div class="flex justify-between items-center">
+                        <p class="text-sm text-gray-700">
+                            Showing <span class="font-medium">1</span> to <span class="font-medium">10</span> of <span class="font-medium" id="admin-orders-total">0</span> orders
+                        </p>
+                        <div class="flex space-x-2">
+                            <button class="border rounded-md px-3 py-1 text-sm">Previous</button>
+                            <button class="bg-water-blue text-white rounded-md px-3 py-1 text-sm">1</button>
+                            <button class="border rounded-md px-3 py-1 text-sm">2</button>
+                            <button class="border rounded-md px-3 py-1 text-sm">3</button>
+                            <button class="border rounded-md px-3 py-1 text-sm">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-6 bg-gray-50 border-b border-gray-200">
+                    <h2 class="text-xl font-semibold text-gray-800">Order Details</h2>
+                </div>
+                <div class="p-6" id="admin-order-details">
+                    <p class="text-gray-600 text-center py-10">Select an order to view details</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Admin Inventory Section -->
+    <section id="admin-inventory" class="page-section py-10">
+        <div class="container mx-auto px-4">
+            <h1 class="text-3xl font-bold text-gray-800 mb-6">Inventory Management</h1>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Box Containers</h2>
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="h-20 w-20 bg-gray-200 rounded-md overflow-hidden">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4d8098f1-f3c6-4d63-8bb1-9df99ad178ef.png" alt="Box container for water refilling - square shaped container with blue cap" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <p class="text-gray-600 mb-1">Current Stock</p>
+                            <p class="text-3xl font-bold" id="box-current-stock">50</p>
+                        </div>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                        <div class="bg-water-blue h-2.5 rounded-full" id="box-stock-bar" style="width: 70%"></div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="box-price">
+                            Price (₱)
+                        </label>
+                        <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="box-price" type="number" step="0.01" value="45.00">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="box-low-stock-threshold">
+                            Low Stock Alert Threshold
+                        </label>
+                        <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="box-low-stock-threshold" type="number" value="20">
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="box-add-stock">
+                                Add Stock
+                            </label>
+                            <div class="flex">
+                                <input class="appearance-none border rounded-l-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="box-add-stock" type="number" value="10">
+                                <button onclick="addInventory('box')" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-r-md">
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="box-remove-stock">
+                                Remove Stock
+                            </label>
+                            <div class="flex">
+                                <input class="appearance-none border rounded-l-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="box-remove-stock" type="number" value="5">
+                                <button onclick="removeInventory('box')" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-r-md">
+                                    Remove
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="updateProductInfo('box')" class="mt-4 w-full btn-water py-2 px-4 rounded-md font-medium">
+                        Save Changes
+                    </button>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Cylinder Containers</h2>
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="h-20 w-20 bg-gray-200 rounded-md overflow-hidden">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ddd26945-09d0-4282-8caf-0f931afac83c.png" alt="Cylinder container for water refilling - tall cylindrical bottle with handle" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <p class="text-gray-600 mb-1">Current Stock</p>
+                            <p class="text-3xl font-bold" id="cylinder-current-stock">75</p>
+                        </div>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                        <div class="bg-water-blue h-2.5 rounded-full" id="cylinder-stock-bar" style="width: 85%"></div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="cylinder-price">
+                            Price (₱)
+                        </label>
+                        <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="cylinder-price" type="number" step="0.01" value="25.00">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="cylinder-low-stock-threshold">
+                            Low Stock Alert Threshold
+                        </label>
+                        <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="cylinder-low-stock-threshold" type="number" value="30">
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="cylinder-add-stock">
+                                Add Stock
+                            </label>
+                            <div class="flex">
+                                <input class="appearance-none border rounded-l-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="cylinder-add-stock" type="number" value="20">
+                                <button onclick="addInventory('cylinder')" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-r-md">
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="cylinder-remove-stock">
+                                Remove Stock
+                            </label>
+                            <div class="flex">
+                                <input class="appearance-none border rounded-l-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="cylinder-remove-stock" type="number" value="10">
+                                <button onclick="removeInventory('cylinder')" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-r-md">
+                                    Remove
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="updateProductInfo('cylinder')" class="mt-4 w-full btn-water py-2 px-4 rounded-md font-medium">
+                        Save Changes
+                    </button>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-6 bg-gray-50 border-b border-gray-200">
+                    <h2 class="text-xl font-semibold text-gray-800">Inventory History</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200" id="inventory-history-table">
+                            <!-- Inventory history will be inserted here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Analytics Section -->
+    <section id="admin-analytics" class="page-section py-10">
+        <div class="container mx-auto px-4">
+            <h1 class="text-3xl font-bold text-gray-800 mb-6">Sales Analytics</h1>
+            
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4 md:mb-0">Sales Forecast</h2>
+                    <div class="flex space-x-4">
+                        <button class="border border-gray-300 rounded-md px-4 py-2 text-sm" id="forecast-weekly">Weekly</button>
+                        <button class="bg-water-blue text-white rounded-md px-4 py-2 text-sm" id="forecast-monthly">Monthly</button>
+                        <button class="border border-gray-300 rounded-md px-4 py-2 text-sm" id="forecast-quarterly">Quarterly</button>
+                    </div>
+                </div>
+                <div class="h-80">
+                    <canvas id="forecast-chart"></canvas>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Product Sales Distribution</h2>
+                    <div class="h-60">
+                        <canvas id="product-distribution-chart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Order Status Distribution</h2>
+                    <div class="h-60">
+                        <canvas id="order-status-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+                <div class="p-6 bg-gray-50 border-b border-gray-200">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4 md:mb-0">Sales Reports</h2>
+                        <div class="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-4">
+                            <div>
+                                <select class="border rounded-md px-4 py-2 focus:outline-none">
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="monthly" selected>Monthly</option>
+                                    <option value="yearly">Yearly</option>
+                                </select>
+                            </div>
+                            <button class="btn-water py-2 px-4 rounded-md font-medium">
+                                <i class="fas fa-download mr-2"></i> Export Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Period</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Box Containers Sold</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cylinder Containers Sold</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Orders</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Revenue</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Growth</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200" id="sales-report-table">
+                            <!-- Sales report data will be inserted here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Import Historical Sales Data</h2>
+                <p class="text-gray-600 mb-4">Upload CSV or Excel files to import historical sales data for better forecasting.</p>
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                    <i class="fas fa-file-upload text-gray-400 text-4xl mb-3"></i>
+                    <p class="text-gray-500 mb-4">Drag and drop your files here, or click to browse</p>
+                    <input type="file" id="sales-data-upload" class="hidden" accept=".csv, .xlsx">
+                    <button onclick="document.getElementById('sales-data-upload').click()" class="btn-water py-2 px-4 rounded-md font-medium">
+                        Browse Files
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notification Toast -->
+    <div id="notification-toast" class="fixed bottom-4 right-4 bg-white rounded-lg shadow-lg max-w-xs w-full p-4 hidden">
+        <div class="flex items-center">
+            <div id="notification-icon" class="flex-shrink-0 mr-3">
+                <i class="fas fa-check-circle text-green-500 text-xl"></i>
+            </div>
+            <div class="flex-1">
+                <p class="text-sm font-medium text-gray-900" id="notification-title">Success</p>
+                <p class="text-sm text-gray-500" id="notification-message">Operation completed successfully.</p>
+            </div>
+            <button onclick="hideNotification()" class="text-gray-400 hover:text-gray-500">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
     </div>
 
-  </main>
+    <!-- Order Status Modal -->
+    <div id="order-status-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold text-gray-800">Update Order Status</h3>
+                <button onclick="closeOrderStatusModal()" class="text-gray-400 hover:text-gray-500">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="mb-4">
+                <p class="text-gray-600 mb-2">Current Status: <span id="current-order-status" class="font-medium">Pending</span></p>
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="new-order-status">
+                    New Status
+                </label>
+                <select class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="new-order-status">
+                    <option value="pending">Pending</option>
+                    <option value="processing">Processing</option>
+                    <option value="out-for-delivery">Out for Delivery</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="order-status-notes">
+                    Notes (Optional)
+                </label>
+                <textarea class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="order-status-notes" placeholder="Add notes about this status change"></textarea>
+            </div>
+            <div class="flex justify-end">
+                <button onclick="closeOrderStatusModal()" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium py-2 px-4 rounded-md mr-2">
+                    Cancel
+                </button>
+                <button onclick="updateOrderStatus()" class="btn-water py-2 px-4 rounded-md font-medium">
+                    Update Status
+                </button>
+            </div>
+        </div>
+    </div>
 
-  <!-- Lightbox -->
-  <div id="lightbox" aria-hidden="true" role="dialog" onclick="closeLightbox()">
-    <img id="lb-img" alt="Enlarged photo">
-  </div>
-
-  <!-- AI Chatbot (Chatbase embed example). Replace CHATBOT_ID with your id. -->
-  <!-- To use OpenAI directly you'd add a small proxy/backend to keep your API key secret. -->
-  <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Fade-in intersection
-    const fades = document.querySelectorAll('.fade');
-    const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }); }, {threshold: 0.12});
-    fades.forEach(n => io.observe(n));
-
-    // Skill bars animation
-    const bars = document.querySelectorAll('.bar');
-    const barObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting){
-          const el = entry.target;
-          el.style.width = el.dataset.value;
-          entry.unobserve(el);
-        }
-      });
-    }, {threshold: 0.55});
-    bars.forEach(b => barObserver.observe(b));
-
-    // Lightbox
-    function openLightbox(src){
-      const lb = document.getElementById('lightbox');
-      const img = document.getElementById('lb-img');
-      img.src = src;
-      lb.style.display = 'flex';
-      lb.setAttribute('aria-hidden','false');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeLightbox(){
-      const lb = document.getElementById('lightbox');
-      const img = document.getElementById('lb-img');
-      lb.style.display = 'none';
-      lb.setAttribute('aria-hidden','true');
-      img.src = '';
-      document.body.style.overflow = '';
-    }
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
-
-    // Expose functions globally for onclick handlers in markup
-    window.openLightbox = openLightbox;
-    window.closeLightbox = closeLightbox;
-  </script>
-
-  <!-- Optional Chatbot embed (Chatbase) - place before closing body. Replace YOUR_CHATBASE_ID -->
-  <!--
-  <script>
-    window.embeddedChatbotConfig = { chatbotId: "YOUR_CHATBASE_ID", domain: "www.chatbase.co" };
-  </script>
-  <script src="https://www.chatbase.co/embed.min.js" chatbotId="YOUR_CHATBASE_ID" domain="www.chatbase.co" defer></script>
-  -->
-
-  <!-- Optional Google Analytics (replace G-XXXXXXX) -->
-  <!--
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-XXXXXXX');
-  </script>
-  -->
-
-  <!-- Notes for you (remove before publishing):
-       - Replace image filenames (1.jpg,2.jpg,3.jpg,4.jpg,5.jpg) with real optimized images (1200px+ or WebP).
-       - Replace YOUR_FORM_ID with your Formspree form id, and your-resume.pdf with your resume file.
-       - To use OpenAI as chatbot you need a small server to hold your API key (I can provide an express example).
-       - Want this converted to a React/Vite template or deployed to GitHub Pages? Tell me which and I'll produce it.
-  -->
-
+    <script src="app.js"></script>
 </body>
 </html>

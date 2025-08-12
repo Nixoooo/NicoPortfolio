@@ -1,0 +1,55 @@
+/* Custom CSS */
+.bg-water-blue {
+    background-color: #5cb8d6;
+}
+.bg-water-light {
+    background-color: #e7f5f9;
+}
+.text-water-blue {
+    color: #3a97b5;
+}
+.border-water-blue {
+    border-color: #3a97b5;
+}
+.btn-water {
+    background-color: #3a97b5;
+    color: white;
+    transition: all 0.3s;
+}
+.btn-water:hover {
+    background-color: #2d7a91;
+    color: white;
+}
+.water-drop {
+    position: relative;
+    animation: drop 2s infinite ease-in-out;
+}
+@keyframes drop {
+    0% { transform: translateY(0) scale(1); opacity: 0.7; }
+    50% { transform: translateY(15px) scale(0.9); opacity: 1; }
+    100% { transform: translateY(0) scale(1); opacity: 0.7; }
+}
+.inventory-low {
+    background-color: #fecaca;
+}
+.page-section {
+    display: none;
+}
+.active-section {
+    display: block;
+}
+.loader {
+    border: 5px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 5px solid #3a97b5;
+    width: 30px;
+    height: 30px;
+    animation: spin 2s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.dropdown-menu {
+    min-width: 250px;
+}
